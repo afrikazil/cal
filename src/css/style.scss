@@ -1,0 +1,55 @@
+#calendar {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.formPicker {
+  position: absolute;
+  width: 300px;
+  padding: 10px;
+  background: #C1C1C1;
+  margin: 0 auto;
+  border-radius: 3px;
+  box-shadow: 0 6px 6px rgba(0,0,0,0.175);
+  opacity: 0;
+  display: none;
+  z-index: 998;
+}
+
+.wrapAddEvent {
+  position: absolute;
+  background: #fff;
+  padding: 20px;
+  width: 400px;
+  min-height: 250px;
+  border: 1px solid #c1c1c1;
+  -webkit-box-shadow: 0px 5px 15px 0px rgba(50, 50, 50, 0.8);
+  -moz-box-shadow:    0px 5px 15px 0px rgba(50, 50, 50, 0.8);
+  box-shadow:         0px 5px 15px 0px rgba(50, 50, 50, 0.8);
+  display: none;
+  z-index: 998;
+}
+/*
+.wrapAddEvent .triangle {
+	width: 30px;
+    position: absolute;
+    height: 30px;
+    background: url('./images/triangle.png');
+    background-repeat: no-repeat;
+    bottom: -30px;
+    background-size: 100%;
+    left: 178px;
+}
+*/
+.cross {
+  position: absolute;
+  right: 5px;
+  top:5px;
+  font-size: 21px!important;
+  font-weight: lighter!important;
+  color: black;
+  cursor: pointer;
+}
+
+.eventDateTimeString {
+  text-transform: lowercase;
+}
