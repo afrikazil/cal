@@ -1,11 +1,42 @@
+function jsonMerge(json1, json2){
+    var out = {};
+    for(var k1 in json1){
+        if (json1.hasOwnProperty(k1)) out[k1] = json1[k1];
+    }
+    for(var k2 in json2){
+        if (json2.hasOwnProperty(k2)) {
+            if(
+                (typeof out[k2] === 'object') && (out[k2].constructor === Object) &&
+                (typeof json2[k2] === 'object') && (json2[k2].constructor === Object)
+            ) {out[k2] = jsonMerge(out[k2], json2[k2])}
+            else{
+                out[k2] = json2[k2];
+            }
+        }
+    }
+    return out;
+}
+
+function loger(){
+    for(i in arguments){
+        console.log(arguments[i]);
+    }
+}
+
 $(document).ready(function(){
    var full_scrpt = $('<script>');
     full_scrpt.on('load',function(){
-       console.log()
-        $('#calendar').fullCalendar({
+        var agenda_day = {
+            defaultView: 'agendaDay',
+        };
+        var calendarOptions = {
             defaultView: 'month',  // or agendaDay or agendaMonth
             lang: 'ru',
-            timeFormat: 'H(:mm)',
+            slotLabelFormat: 'H:mm',
+            minTime:'8:00:00',
+            maxTime:'22:00:00',
+            firstDay:1,
+            nowIndicator:true,
             monthNames: ['Январ','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
             monthNamesShort: ['Янв.','Фев.','Март','Апр.','Май','Июнь','Июль','Авг.','Сент.','Окт.','Ноя.','Дек.'],
             dayNames: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"],
@@ -25,9 +56,13 @@ $(document).ready(function(){
             selectable: true,
             selectHelper: true,
             unselectAuto: false,
-        });
+        };
+
+        var  calendarOptions = jsonMerge(calendarOptions,agenda_day);
+
+
+        $('#calendar').fullCalendar(calendarOptions);
     });
     $('body').append(full_scrpt);
     full_scrpt.attr('src','/dist/js/fullcalendar.js');
-
 });
